@@ -170,6 +170,44 @@ fn main() {
         7 => remove_fancy_hat(),
         _ => (), // nothing happen
     }
+
+    // concise control flow with if let
+    let config_max = Some(3u8);
+    // if let is similar to match, this example using match
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {}", max),
+        _ => (), // to satisfy the match expression
+    }
+    // using if let, less typing less identation less boilerplate code
+    if let Some(max) = config_max {
+        println!("The maximum is configured to be {}", max);
+    }
+
+    // using else
+    let mut count = 0;
+    let coin2 = Coin::Quarter(UsState::Alabama);
+    let coin3 = Coin::Quarter(UsState::Alaska);
+    let coin4 = Coin::Penny;
+    // using match
+    match coin2 {
+        Coin::Quarter(state) => println!("State quarter from {:?}!", state),
+        _ => count += 1,
+    }
+    // using if let
+    if let Coin::Quarter(state) = coin3 {
+        println!("State quarter from {:?}!", state);
+    } else {
+        count += 1;
+    }
+
+    // using else
+    if let Coin::Quarter(state) = coin4 {
+        println!("State quarter from {:?}!", state);
+    } else {
+        count += 1;
+    }
+
+    println!("{}", count);
 }
 
 fn route(ip_kind: IpAddrKind) {}
