@@ -142,6 +142,13 @@ fn main() {
 
     // pattern that bind to value
     dbg!(value_in_cents(Coin::Quarter(UsState::Alaska)));
+
+    // matching the option
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+
+    println!("{:?} {:?} {:?}", five, six, none);
 }
 
 fn route(ip_kind: IpAddrKind) {}
@@ -158,5 +165,13 @@ fn value_in_cents(coin: Coin) -> u8 {
             println!("State quarter from {:?}!", state);
             25
         },
+    }
+}
+
+// matching enum option
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
     }
 }
