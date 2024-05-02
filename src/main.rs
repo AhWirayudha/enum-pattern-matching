@@ -66,6 +66,14 @@ impl Message {
 //     Some(T),
 // }
 
+// match in enum
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
 fn main() {
     // set enum value
     let four = IpAddrKind::V4; // value V4 with type enum IpAddrKind, separate by double colon
@@ -117,6 +125,24 @@ fn main() {
     //let sum = x + y;
     dbg!(y);
     dbg!(y.unwrap());
+
+    // test coin
+    let coin = Coin::Penny;
+    let value = value_in_cents(coin);
+
+    println!("{}", value);
 }
 
 fn route(ip_kind: IpAddrKind) {}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => {
+            println!("Lucky penny!");
+            1
+        },
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
