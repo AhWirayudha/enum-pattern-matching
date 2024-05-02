@@ -66,12 +66,20 @@ impl Message {
 //     Some(T),
 // }
 
+// pattern that bind to value
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    // --snip--
+}
+
 // match in enum
 enum Coin {
     Penny,
     Nickel,
     Dime,
-    Quarter,
+    Quarter(UsState), // include enum value UsState
 }
 
 fn main() {
@@ -131,6 +139,9 @@ fn main() {
     let value = value_in_cents(coin);
 
     println!("{}", value);
+
+    // pattern that bind to value
+    dbg!(value_in_cents(Coin::Quarter(UsState::Alaska)));
 }
 
 fn route(ip_kind: IpAddrKind) {}
@@ -143,6 +154,9 @@ fn value_in_cents(coin: Coin) -> u8 {
         },
         Coin::Nickel => 5,
         Coin::Dime => 10,
-        Coin::Quarter => 25,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        },
     }
 }
