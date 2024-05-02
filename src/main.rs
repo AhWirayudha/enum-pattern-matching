@@ -60,6 +60,12 @@ impl Message {
     fn call(&self) {}
 }
 
+// enum option, already defined by standard library you can use None or Some with Option::
+// enum Option<T> {
+//     None,
+//     Some(T),
+// }
+
 fn main() {
     // set enum value
     let four = IpAddrKind::V4; // value V4 with type enum IpAddrKind, separate by double colon
@@ -98,6 +104,19 @@ fn main() {
     // enum impl, can call method
     let m = Message::Write(String::from("hello"));
     m.call();
+
+    // enum option, Option<T> similar to generic? *standart library
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    // non valid value sample, error
+    // let x: i8 = 5; // different type enum cause error
+    let y: Option<i8> = Some(5);
+
+    //let sum = x + y;
+    dbg!(y);
+    dbg!(y.unwrap());
 }
 
 fn route(ip_kind: IpAddrKind) {}
