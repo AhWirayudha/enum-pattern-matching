@@ -149,6 +149,27 @@ fn main() {
     let none = plus_one(None);
 
     println!("{:?} {:?} {:?}", five, six, none);
+
+    // catch all pattern and the _ placeholder
+    // rolling dice
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        other => move_player(other), // catch all other pattern, we must put at last
+    }
+    // _ placeholder, catch all pattern without using value
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => reroll(), // does not bind to value
+    }
+    // if we want it to be nothing else happen
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => (), // nothing happen
+    }
 }
 
 fn route(ip_kind: IpAddrKind) {}
@@ -175,3 +196,9 @@ fn plus_one(x: Option<i32>) -> Option<i32> {
         Some(i) => Some(i + 1),
     }
 }
+
+// catch all pattern rolling dice
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
+fn move_player(num_spaces: u8) {}
+fn reroll() {}
